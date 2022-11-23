@@ -1,0 +1,120 @@
+[
+    {
+        "id": "b18fb372ccedc6a6",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5d692daf1bf10a9b",
+        "type": "mqtt-broker",
+        "name": "LabDigi",
+        "broker": "labdigi.wiseful.com.br",
+        "port": "80",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "c31e4098e29134b7",
+        "type": "mongodb",
+        "hostname": "cluster0.as8uy8v.mongodb.net",
+        "topology": "dnscluster",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "dados",
+        "name": "MongoDB"
+    },
+    {
+        "id": "ed5a45f049308031",
+        "type": "mqtt in",
+        "z": "b18fb372ccedc6a6",
+        "name": "MQTT",
+        "topic": "grupo2-bancadaA3/angle",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "5d692daf1bf10a9b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 290,
+        "y": 320,
+        "wires": [
+            [
+                "f7de06ea6b6f659c"
+            ]
+        ]
+    },
+    {
+        "id": "f7de06ea6b6f659c",
+        "type": "function",
+        "z": "b18fb372ccedc6a6",
+        "name": "ConvertToObject",
+        "func": "let data = msg.payload.split(\" \");\nlet row ={\n    \"car_distance\": data[0],\n    \"angle\": data[1],\n    \"cube_distance\": data[2],\n    \"time\": new Date().toISOString()\n};\nmsg.payload=row;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 320,
+        "wires": [
+            [
+                "ece09ea2e9ce8ec4",
+                "b03fdb29d0dab998"
+            ]
+        ]
+    },
+    {
+        "id": "ece09ea2e9ce8ec4",
+        "type": "debug",
+        "z": "b18fb372ccedc6a6",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "b03fdb29d0dab998",
+        "type": "mongodb out",
+        "z": "b18fb372ccedc6a6",
+        "mongodb": "c31e4098e29134b7",
+        "name": "Insert",
+        "collection": "posicoes",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "insert",
+        "x": 770,
+        "y": 300,
+        "wires": []
+    }
+]
