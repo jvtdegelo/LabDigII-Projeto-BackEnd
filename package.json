@@ -3,11 +3,12 @@
     "description": "A Node-RED Project",
     "version": "0.0.1",
     "scripts": {
-      "editor": "node-red --settings=./settings.js -D httpAdminRoot=/ -D readOnly=false",
-      "start": "node-red --settings=./settings.js"
+        "editor": "node-red --settings=./settings.js -D httpAdminRoot=/ -D readOnly=false",
+        "start": "node-red --settings=./settings.js"
     },
     "private": true,
     "dependencies": {
+        "dotenv": "^16.0.3",
         "node-red-node-mongodb": "^0.2.5"
     }
 }

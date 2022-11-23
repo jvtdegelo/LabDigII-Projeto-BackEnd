@@ -19,7 +19,12 @@
  *  - Node Settings
  *
  **/
-
+ require('dotenv').config()
+ // ...
+     
+ 
+     
+ 
 module.exports = {
 
 /*******************************************************************************
@@ -33,6 +38,8 @@ module.exports = {
 
     /** The file containing the flows. If not set, defaults to flows_<hostname>.json **/
     flowFile: 'flows.json',
+    
+    
 
     /** By default, credentials are encrypted in storage using a generated key. To
      * specify your own secret, set the following property.
@@ -41,7 +48,7 @@ module.exports = {
      * node-red from being able to decrypt your existing credentials and they will be
      * lost.
      */
-    //credentialSecret: "a-secret-key",
+     credentialSecret: process.env.CREDENTIAL_FILE_KEY ?? (() => { throw new Error() })(),
 
     /** By default, the flow JSON will be formatted over multiple lines making
      * it easier to compare changes when using version control.
