@@ -70,7 +70,7 @@
         "type": "function",
         "z": "b18fb372ccedc6a6",
         "name": "ConvertToObject",
-        "func": "let data = msg.payload.split(\" \");\nlet row ={\n    \"car_distance\": data[0],\n    \"angle\": data[1],\n    \"cube_distance\": data[2],\n    \"time\": new Date().toISOString()\n};\nmsg.payload=row;\nreturn msg;",
+        "func": "let data = msg.payload.split(\",\");\nlet row ={\n    \"car_distance\": data[0],\n    \"angle\": data[1],\n    \"cube_distance\": data[2],\n    \"time\": new Date().toISOString()\n};\nmsg.payload=row;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
