@@ -70,14 +70,14 @@
         "type": "function",
         "z": "b18fb372ccedc6a6",
         "name": "ConvertToObject",
-        "func": "let data = msg.payload.split(\",\");\nlet row ={\n    \"car_distance\": data[0],\n    \"angle\": data[1],\n    \"cube_distance\": data[2],\n    \"time\": new Date().toISOString()\n};\nmsg.payload=row;\nreturn msg;",
+        "func": "let str1 = msg.payload.split(\".\");\nlet str2 = str1[1].split(\",\");\nlet car_int = parseInt(str1[0]);\nlet angle_int = parseInt(str2[0]);\nlet cube_int = parseInt(str2[1]);\n\nlet row ={\n    \"car_distance\": car_int,\n    \"angle\": angle_int,\n    \"cube_distance\": cube_int,\n    \"time\": new Date()\n};\nmsg.payload=row;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 530,
-        "y": 320,
+        "x": 510,
+        "y": 240,
         "wires": [
             [
                 "b03fdb29d0dab998"
@@ -98,5 +98,115 @@
         "x": 770,
         "y": 300,
         "wires": []
+    },
+    {
+        "id": "9abc4321f61e8ca8",
+        "type": "http in",
+        "z": "b18fb372ccedc6a6",
+        "name": "Dados Banco",
+        "url": "/data",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 460,
+        "wires": [
+            [
+                "8f8316d886833713"
+            ]
+        ]
+    },
+    {
+        "id": "85be8f2e74c8a2b1",
+        "type": "http response",
+        "z": "b18fb372ccedc6a6",
+        "name": "Response dados",
+        "statusCode": "200",
+        "headers": {},
+        "x": 930,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "55319643639ecd0d",
+        "type": "http in",
+        "z": "b18fb372ccedc6a6",
+        "name": "Post Distance",
+        "url": "/distance",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 330,
+        "y": 600,
+        "wires": [
+            [
+                "7b168ed75c06c938",
+                "b0d553287062fa3f"
+            ]
+        ]
+    },
+    {
+        "id": "b0d553287062fa3f",
+        "type": "http response",
+        "z": "b18fb372ccedc6a6",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 840,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "0634d34668be8f4b",
+        "type": "mongodb in",
+        "z": "b18fb372ccedc6a6",
+        "mongodb": "c31e4098e29134b7",
+        "name": "",
+        "collection": "posicoes",
+        "operation": "find",
+        "x": 630,
+        "y": 460,
+        "wires": [
+            [
+                "85be8f2e74c8a2b1"
+            ]
+        ]
+    },
+    {
+        "id": "7b168ed75c06c938",
+        "type": "mqtt out",
+        "z": "b18fb372ccedc6a6",
+        "name": "Send virtual cube data",
+        "topic": "grupo2-bancadaA3/virtual_cube",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "5d692daf1bf10a9b",
+        "x": 620,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "8f8316d886833713",
+        "type": "function",
+        "z": "b18fb372ccedc6a6",
+        "name": "Fill find parameters",
+        "func": "msg.limit= 10;\nmsg.sort= {\n    time:-1\n};\n\n \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 460,
+        "wires": [
+            [
+                "0634d34668be8f4b"
+            ]
+        ]
     }
 ]
