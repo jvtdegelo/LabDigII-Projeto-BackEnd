@@ -49,7 +49,7 @@
         "type": "mqtt in",
         "z": "b18fb372ccedc6a6",
         "name": "MQTT",
-        "topic": "grupo2-bancadaA3/angle",
+        "topic": "grupo2-bancadaA3/all",
         "qos": "0",
         "datatype": "auto-detect",
         "broker": "5d692daf1bf10a9b",
