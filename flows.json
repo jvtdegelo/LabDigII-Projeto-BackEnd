@@ -214,5 +214,73 @@
                 "0634d34668be8f4b"
             ]
         ]
+    },
+    {
+        "id": "ba29a01da90f10e1",
+        "type": "http in",
+        "z": "b18fb372ccedc6a6",
+        "name": "Post Distance",
+        "url": "/dist",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 310,
+        "y": 820,
+        "wires": [
+            [
+                "900799837d91f096",
+                "f4f2b5d24f1d61fe"
+            ]
+        ]
+    },
+    {
+        "id": "900799837d91f096",
+        "type": "http response",
+        "z": "b18fb372ccedc6a6",
+        "name": "Response distance",
+        "statusCode": "200",
+        "headers": {
+            "Access-Control-Allow-Origin": "*"
+        },
+        "x": 850,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "7419c02ee4a917e3",
+        "type": "mqtt out",
+        "z": "b18fb372ccedc6a6",
+        "name": "Send virtual cube data",
+        "topic": "grupo2-bancadaA3/virtual_cube",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "5d692daf1bf10a9b",
+        "x": 700,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "f4f2b5d24f1d61fe",
+        "type": "function",
+        "z": "b18fb372ccedc6a6",
+        "name": "function 1",
+        "func": "msg.payload = msg.req.params.dist\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 880,
+        "wires": [
+            [
+                "7419c02ee4a917e3"
+            ]
+        ]
     }
 ]
