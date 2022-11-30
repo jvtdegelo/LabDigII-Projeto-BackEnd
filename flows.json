@@ -155,7 +155,7 @@
         "statusCode": "200",
         "headers": {
             "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Methods": "OPTIONS, GET, POST, PUT, PATCH, DELETE",
             "Access-Control-Allow-Headers": "Content-Type, Authorization"
         },
         "x": 870,
@@ -229,7 +229,8 @@
         "wires": [
             [
                 "900799837d91f096",
-                "f4f2b5d24f1d61fe"
+                "f4f2b5d24f1d61fe",
+                "04c9b872de8031b4"
             ]
         ]
     },
@@ -269,7 +270,7 @@
         "type": "function",
         "z": "b18fb372ccedc6a6",
         "name": "function 1",
-        "func": "msg.payload = msg.req.params.dist\nreturn msg;",
+        "func": "msg.payload = msg.payload.dist;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -282,5 +283,22 @@
                 "7419c02ee4a917e3"
             ]
         ]
+    },
+    {
+        "id": "04c9b872de8031b4",
+        "type": "debug",
+        "z": "b18fb372ccedc6a6",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 1000,
+        "wires": []
     }
 ]
