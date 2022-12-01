@@ -122,7 +122,9 @@
         "z": "b18fb372ccedc6a6",
         "name": "Response dados",
         "statusCode": "200",
-        "headers": {},
+        "headers": {
+            "Access-Control-Allow-Origin": "*"
+        },
         "x": 930,
         "y": 460,
         "wires": []
@@ -151,7 +153,9 @@
         "z": "b18fb372ccedc6a6",
         "name": "Response distance",
         "statusCode": "200",
-        "headers": {},
+        "headers": {
+            "Access-Control-Allow-Origin": "*"
+        },
         "x": 870,
         "y": 600,
         "wires": []
