@@ -70,7 +70,7 @@
         "type": "function",
         "z": "b18fb372ccedc6a6",
         "name": "ConvertToObject",
-        "func": "let str1 = msg.payload.split(\".\");\nlet str2 = str1[1].split(\",\");\nlet car_int = parseInt(str1[0]);\nlet angle_int = parseInt(str2[0]);\nlet cube_int = parseInt(str2[1]);\n\nlet row ={\n    \"car_distance\": car_int,\n    \"angle\": angle_int,\n    \"cube_distance\": cube_int,\n    \"time\": new Date()\n};\nmsg.payload=row;\nreturn msg;",
+        "func": "let str1 = msg.payload.split(\".\");\nlet str2 = str1[1].split(\",\");\nlet cube_int = parseInt(str1[0]);\nlet angle_int = parseInt(str2[0]);\nlet car_int = parseInt(str2[1]);\n\nlet row ={\n    \"car_distance\": car_int,\n    \"angle\": angle_int,\n    \"cube_distance\": cube_int,\n    \"time\": new Date()\n};\nmsg.payload=row;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
